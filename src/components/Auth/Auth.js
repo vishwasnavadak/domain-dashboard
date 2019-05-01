@@ -1,22 +1,21 @@
 import auth0 from "auth0-js";
 import history from "./History";
 
-import { auth } from "../../config.json";
 
 export default class Auth {
   accessToken;
   idToken;
   expiresAt;
   userProfile;
-
+//changes by adb
   auth0 = new auth0.WebAuth({
-    domain: auth.domain,
-    clientID: auth.clientID,
-    redirectUri: auth.redirectUri,
+    domain: "example.auth0.com",
+    clientID: "__CLIENT_ID__",
+    redirectUri: "http://localhost:3000/callback",
     responseType: "token id_token",
-    scope: "openid email profile",
-    audience: auth.audience,
-    issuer: auth.issuer
+    scope: "openid email profile"
+    //,audience: auth.audience,
+    //issuer: auth.issuer
   });
   constructor() {
     this.scheduleRenewal();
