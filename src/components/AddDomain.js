@@ -20,6 +20,7 @@ const AddDomain = () => {
       <button className="btn" type="submit">
         Add
       </button>
+      <p>Success Message</p>
     </form>
   );
   const switchButton = (

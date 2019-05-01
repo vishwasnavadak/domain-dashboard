@@ -1,18 +1,18 @@
 // The Landing Page
 import React from "react";
-import NavBar from "./NavBar";
 
-const HomePage = () => {
+const HomePage = props => {
+  const { login } = props.auth;
+
   return (
     <div className="home-page">
-      <NavBar />
       <section className="main">
         <h1>Welcome, this is homepage</h1>
         <p>
           Lorem Ipsum <br />
-          <a className="btn" href="/login">
+          <button className="btn" onClick={() => login()}>
             Signup Now
-          </a>
+          </button>
         </p>
       </section>
       <Footer />

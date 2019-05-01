@@ -1,18 +1,48 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route, Redirect } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
-import { Login, Logout } from "./components/User";
+import Callback from "./components/Auth/Callback";
+import Auth from "./components/Auth/Auth";
+import history from "./components/Auth/History";
+
+const auth = new Auth();
+
+const handleAuthentication = ({ location }) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+};
 
 export const getRoutes = () => {
   return (
-    <Router>
+    <Router history={history}>
       <div>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/app" component={Dashboard} />
-        <Route path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
+        <Route
+          exact
+          path="/"
+          render={props => <HomePage auth={auth} {...props} />}
+        />
+        <Route
+          path="/app"
+          render={
+            props => (
+              // !auth.isAuthenticated() ? (
+              //   <Redirect to="/" />
+              // ) : (
+              <Dashboard auth={auth} {...props} />
+            )
+            // )
+          }
+        />
+        <Route
+          path="/callback"
+          render={props => {
+            handleAuthentication(props);
+            return <Callback {...props} />;
+          }}
+        />
       </div>
     </Router>
   );

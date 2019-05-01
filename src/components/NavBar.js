@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = props => {
+  const { login, isAuthenticated, logout } = props.auth;
   //TODO display login or logout links conditionally
   return (
     <nav>
@@ -11,11 +12,20 @@ const NavBar = () => {
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
+          {!isAuthenticated() && (
+            <li>
+              <Link to="#" onClick={login.bind(this)}>
+                Login
+              </Link>
+            </li>
+          )}
+          {isAuthenticated() && (
+            <li>
+              <Link to="#">Logout</Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

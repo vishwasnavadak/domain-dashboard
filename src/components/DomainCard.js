@@ -2,20 +2,22 @@ import React from "react";
 
 const DomainCard = props => {
   return (
-    <li className="card domain-card">
-      <span className="domain-title">
+    <li className="card z-depth-1 domain-card">
+      <div className="domain-title">
         {props.title}
         <br />
         <small>{props.url}</small>
-      </span>
-      <span>
-        Last Renewal: <br />
+      </div>
+      <div className="domain-date" id="renewed">
+        <small>Renewed: </small>
+        <br />
         {props.dates.renewedDate}
-      </span>
-      <span>
-        Expiry: <br />
+      </div>
+      <div className="domain-date" id="expiry">
+        <small>Expiry: </small>
+        <br />
         {props.dates.expiryDate}
-      </span>
+      </div>
     </li>
   );
 };

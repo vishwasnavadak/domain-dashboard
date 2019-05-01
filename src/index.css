@@ -2,7 +2,7 @@
   --primary-font-color: #000;
   --sec-font-color: #333;
   --primary-bg-color: #fff;
-  --sec-bg-color: #eee;
+  --sec-bg-color: rgba(243, 243, 243, 0.3);
   --title-font-size: 5vh;
   --primary-font-size: 3vh;
   --sec-font-size: 2vh;
@@ -46,24 +46,35 @@ footer {
   text-align: center;
 }
 .domain-listing {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   margin: 10px;
   padding: 5px;
   list-style: none;
 }
+.domain-title {
+  grid-area: title;
+}
+.domain-date #renewed {
+  grid-area: renewed;
+}
+.domain-date #expiry {
+  grid-area: expiry;
+}
 .domain-card {
   margin: 5px !important;
-  padding: 8px;
-  max-height: 80px;
-  background: var(--sec-bg-color);
-  border: 1px solid #aaa;
+  padding: 10px;
+  background: var(--sec-bg-color) !important;
+  border: 1px solid var(--sec-bg-color);
   display: grid;
+  grid-template-areas: "title renewed expiry";
   grid-template-columns: repeat(3, 1fr);
 }
 
 @media (max-width: 600px) {
-  .domain-listing {
-    grid-template-columns: 1fr;
+  .domain-card {
+    text-align: center;
+    grid-template-columns: auto;
+    grid-template-areas:
+      "title title"
+      "renewed expiry";
   }
 }
