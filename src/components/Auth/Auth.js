@@ -1,35 +1,24 @@
 import auth0 from "auth0-js";
 import history from "./History";
 
-import { auth } from "../../config.json";
 
 export default class Auth {
   accessToken;
   idToken;
   expiresAt;
   userProfile;
-
+//changes by adb
   auth0 = new auth0.WebAuth({
-    domain: auth.domain,
-    clientID: auth.clientID,
-    redirectUri: auth.redirectUri,
+    domain: "example.auth0.com",
+    clientID: "__CLIENT_ID__",
+    redirectUri: "http://localhost:3000/callback",
     responseType: "token id_token",
-    scope: "openid email profile",
-    audience: auth.audience,
-    issuer: auth.issuer
+    scope: "openid email profile"
+    //,audience: auth.audience,
+    //issuer: auth.issuer
   });
   constructor() {
-    //just bind the methods to this
-   this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-   // this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.getAccessToken = this.getAccessToken.bind(this);
-    this.getIdToken = this.getIdToken.bind(this);
-    this.renewSession = this.renewSession.bind(this);
-    this.getProfile = this.getProfile.bind(this);
-    //removed 
-    //this.scheduleRenewal();
+    this.scheduleRenewal();
   }
   login = () => {
     console.log("login called!");
