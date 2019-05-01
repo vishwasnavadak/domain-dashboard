@@ -19,7 +19,17 @@ export default class Auth {
     issuer: auth.issuer
   });
   constructor() {
-    this.scheduleRenewal();
+    //just bind the methods to this
+   this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+   // this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
+    this.getIdToken = this.getIdToken.bind(this);
+    this.renewSession = this.renewSession.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+    //removed 
+    //this.scheduleRenewal();
   }
   login = () => {
     console.log("login called!");
